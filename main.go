@@ -5,8 +5,6 @@ import (
 	"github.com/jaroxcraft/vps-dash-server/scheduler"
 	"github.com/jaroxcraft/vps-dash-server/server"
 	"github.com/jaroxcraft/vps-dash-server/system"
-	"log"
-	"net/http"
 )
 
 func main() {
@@ -17,9 +15,6 @@ func main() {
 
 	system.GetCpuUsage()
 
-	server.RegisterRoutes()
-	err := http.ListenAndServe(":8080", nil)
-	if err != nil {
-		log.Fatal(err)
-	}
+	server.NewWithRoutes()
+	server.Start()
 }

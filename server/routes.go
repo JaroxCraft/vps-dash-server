@@ -8,13 +8,12 @@ import (
 )
 
 func RegisterRoutes() {
-	http.HandleFunc("/snapshots", func(writer http.ResponseWriter, request *http.Request) {
-		writer.Header().Add("Content-Type", "text/json")
-
-		// TODO: write custom marshaller for better control
+	Server().HandleFunc("GET /snapshots", func(writer http.ResponseWriter, request *http.Request) {
+		writer.Header().Set("Content-Type", "text/json; charset=utf-8")
 		err := json.NewEncoder(writer).Encode(scheduler.GetSnapshots())
 		if err != nil {
-			logger.Get().Errorf("Error encoding snapshots: %s", err)
+			logger.Get().Warnf("Failed encoding snapshots: %s", err)
+			return
 		}
 	})
 }

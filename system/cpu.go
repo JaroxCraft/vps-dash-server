@@ -12,7 +12,7 @@ func cpuUsage() (float64, error) {
 	// Get CPU usage percentages
 	percentages, err := cpu.Percent(time.Second, false)
 	if err != nil {
-		return 0, fmt.Errorf("error getting cpu usage: %v", err)
+		return 0, fmt.Errorf("error getting cpu usage: %w", err)
 	}
 
 	if len(percentages) == 0 {
@@ -24,7 +24,7 @@ func cpuUsage() (float64, error) {
 func GetCpuUsage() uint8 {
 	percentage, err := cpuUsage()
 	if err != nil {
-		logger.Get().Errorf("Error while getting cpu usage: %v", err)
+		logger.Get().Errorf("Error while getting cpu usage: %s", err)
 	}
 	logger.Get().Infof("CPU usage is: %.2f", percentage)
 	return uint8(math.Ceil(percentage))
