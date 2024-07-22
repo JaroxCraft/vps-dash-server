@@ -11,6 +11,7 @@ import (
 func GetSnapshots(server *http.ServeMux) {
 	server.HandleFunc("GET /snapshots/", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "text/json; charset=utf-8")
+		w.Header().Set("Access-Control-Allow-Origin", "*")
 		allowed := security.ValidateToken(*r)
 		if !allowed {
 			http.Error(w, "Token invalid", http.StatusUnauthorized)
