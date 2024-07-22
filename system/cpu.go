@@ -5,11 +5,12 @@ import (
 	"github.com/jaroxcraft/vps-dash-server/logger"
 	"github.com/shirou/gopsutil/cpu"
 	"math"
+	"time"
 )
 
 func cpuUsage() (float64, error) {
 	// Get CPU usage percentages
-	percentages, err := cpu.Percent(0, false)
+	percentages, err := cpu.Percent(time.Second, false)
 	if err != nil {
 		return 0, fmt.Errorf("error getting cpu usage: %v", err)
 	}
@@ -25,5 +26,6 @@ func GetCpuUsage() uint8 {
 	if err != nil {
 		logger.Get().Errorf("Error while getting cpu usage: %v", err)
 	}
+	logger.Get().Infof("CPU usage is: %.2f", percentage)
 	return uint8(math.Ceil(percentage))
 }

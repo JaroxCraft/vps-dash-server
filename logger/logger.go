@@ -20,7 +20,7 @@ func create() *zap.SugaredLogger {
 	config := zap.NewDevelopmentConfig()
 	config.Level.SetLevel(zapcore.DebugLevel)
 	config.EncoderConfig.EncodeLevel = zapcore.CapitalColorLevelEncoder
-	config.EncoderConfig.EncodeTime = zapcore.TimeEncoderOfLayout(time.RFC1123)
+	config.EncoderConfig.EncodeTime = zapcore.TimeEncoderOfLayout(time.Kitchen)
 
 	created, err := config.Build()
 	if err != nil {
