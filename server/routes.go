@@ -46,9 +46,8 @@ func RegisterRoutes() {
 			return
 		}
 
-		process := system.GetProcess(int32(pid))
-
-		if process.Name == "" {
+		process, err := system.GetProcess(int32(pid))
+		if err != nil {
 			http.Error(writer, "Process not found", http.StatusNotFound)
 			return
 		}

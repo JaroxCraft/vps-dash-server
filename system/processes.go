@@ -1,6 +1,7 @@
 package system
 
 import (
+	"fmt"
 	"github.com/jaroxcraft/vps-dash-server/logger"
 	"github.com/shirou/gopsutil/process"
 )
@@ -34,20 +35,23 @@ func GetProcesses() []Process {
 	return processes
 }
 
-func GetProcess(pid int32) Process { // TODO: make cleaner and faster
-	processes := getPSProcesses()
-	for _, psProcess := range processes {
-		if psProcess.Pid == pid {
-			name, err := psProcess.Name()
-			if err != nil {
-				logger.Get().Errorf("Error while fetching process name: %v", err)
-			}
+func GetProcess(pid int32) (Process, error) {
+	psProcesses := getPSProcesses()
 
-			return Process{
-				Pid:  psProcess.Pid,
-				Name: name,
-			}
+	for _, psProcess := range psProcesses {
+		if !(psProcess.Pid == pid) {
+			continue
 		}
+
+		name, err := psProcess.Name()
+		if err != nil {
+			logger.Get().Errorf("Error while fetching process name: %v", err)
+		}
+
+		return Process{
+			Pid:  psProcess.Pid,
+			Name: name,
+		}, nil
 	}
-	return Process{}
+	return Process{}, fmt.Errorf("process with pid %d not found", pid)
 }
