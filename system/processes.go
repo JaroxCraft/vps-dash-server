@@ -13,7 +13,7 @@ type Process struct {
 func getPSProcesses() []*process.Process {
 	processes, err := process.Processes() // TODO: array of pointers?
 	if err != nil {
-		logger.Get().Errorf("Error while fetching processes: %s", err)
+		logger.Get().Errorf("Error while fetching processes: %v", err)
 	}
 	return processes
 }

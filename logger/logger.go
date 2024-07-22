@@ -24,7 +24,7 @@ func create() *zap.SugaredLogger {
 
 	created, err := config.Build()
 	if err != nil {
-		log.Fatalf("can't initialize zap logger: %s", err)
+		log.Fatalf("can't initialize zap logger: %v", err)
 	}
 
 	logger = created.Sugar()

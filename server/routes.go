@@ -13,7 +13,7 @@ func RegisterRoutes() {
 		writer.Header().Set("Content-Type", "text/json; charset=utf-8")
 		err := json.NewEncoder(writer).Encode(scheduler.GetSnapshots())
 		if err != nil {
-			logger.Get().Warnf("Failed encoding snapshots: %s", err)
+			logger.Get().Warnf("Failed encoding snapshots: %v", err)
 			return
 		}
 	})
@@ -22,7 +22,7 @@ func RegisterRoutes() {
 		writer.Header().Set("Content-Type", "text/json; charset=utf-8")
 		err := json.NewEncoder(writer).Encode(system.GetProcesses())
 		if err != nil {
-			logger.Get().Warnf("Failed encoding processes: %s", err)
+			logger.Get().Warnf("Failed encoding processes: %v", err)
 			return
 		}
 	})

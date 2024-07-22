@@ -18,7 +18,7 @@ func Start() *tasks.Scheduler {
 		TaskFunc:   TakeSnapshot,
 	})
 	if err != nil {
-		logger.Get().Fatalf("Error while Starting Snapshot Scheduler: %s", err)
+		logger.Get().Fatalf("Error while Starting Snapshot Scheduler: %v", err)
 	}
 
 	logger.Get().Infof("Snapshot Scheduler started with id %s", id)
@@ -35,7 +35,7 @@ func GetSnapshotInterval() time.Duration {
 	// TODO: hint in documentation
 	parsedInterval, err := time.ParseDuration(intervalEnv)
 	if err != nil {
-		logger.Get().Errorf("Failed to parse snapshot interval from env, falling back to default of %s: %s", snapshotInterval.String(), err)
+		logger.Get().Errorf("Failed to parse snapshot interval from env, falling back to default of %s: %v", snapshotInterval.String(), err)
 		return snapshotInterval
 	}
 	return parsedInterval

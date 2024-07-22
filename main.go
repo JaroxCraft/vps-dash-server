@@ -11,7 +11,11 @@ import (
 func main() {
 	banner.PrintBanner()
 
-	defer logger.Get().Sync()
+	defer func() {
+		if logger.Get().Sync() != nil {
+			logger.Get().Warnf("Failed Syncing logger: %v", logger.Get().Sync())
+		}
+	}()
 
 	tasks := scheduler.Start()
 	defer tasks.Stop()

@@ -8,7 +8,7 @@ import (
 func Memory() *mem.VirtualMemoryStat {
 	memory, err := mem.VirtualMemory()
 	if err != nil {
-		logger.Get().Errorf("Error getting memory info: %s", err)
+		logger.Get().Errorf("Error getting memory info: %v", err)
 	}
 	return memory
 }

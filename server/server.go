@@ -29,6 +29,6 @@ func NewWithRoutes() *http.ServeMux {
 func Start() {
 	err := http.ListenAndServe(fmt.Sprintf(":%d", GetAPIPort()), server)
 	if err != nil {
-		logger.Get().Fatalf("Error while starting server: %s", err)
+		logger.Get().Fatalf("Error while starting server: %v", err)
 	}
 }
