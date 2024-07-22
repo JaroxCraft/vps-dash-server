@@ -2,18 +2,31 @@ package banner
 
 import (
 	"github.com/fatih/color"
+	"github.com/jaroxcraft/vps-dash-server/colors"
+	"github.com/jaroxcraft/vps-dash-server/info"
 	"io"
 	"os"
 	"strings"
 )
 
-const defaultBanner = "                                  .___             .__\n___  ________  ______           __| _/____    _____|  |__\n\\  \\/ /\\____ \\/  ___/  ______  / __ |\\__  \\  /  ___/  |  \\\n \\   / |  |_> >___ \\  /_____/ / /_/ | / __ \\_\\___ \\|   Y  \\\n  \\_/  |   __/____  >         \\____ |(____  /____  >___|  /\n       |__|       \\/               \\/     \\/     \\/     \\/\n\n"
+const defaultBanner = ""
 
 func PrintBanner() {
 	banner := getBanner()
-	c := color.New(color.FgYellow, color.Bold)
+	banner = colorize(banner)
+	banner = replaceInfo(banner)
+	print(banner)
+}
 
-	_, _ = c.Print(banner)
+func colorize(banner string) string {
+	return colors.S(color.FgYellow, banner)
+}
+
+func replaceInfo(banner string) string {
+	banner = strings.Replace(banner, "${name}", colors.S(color.ReverseVideo, info.GetInfo().Name), -1)
+	banner = strings.Replace(banner, "${version}", colors.S(color.Italic, info.GetInfo().Version), -1)
+
+	return banner
 }
 
 func getBanner() string {

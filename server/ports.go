@@ -18,6 +18,7 @@ func GetAPIPort() uint16 {
 		return port
 	}
 	logger.Get().Warnf("%v, starting on default port %s", err, colors.S(color.FgBlue, strconv.Itoa(defaultPort)))
+	// TODO: link to docs/reference
 	return defaultPort
 }
 
