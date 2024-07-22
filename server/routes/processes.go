@@ -11,7 +11,7 @@ import (
 
 func GetProcesses(server *http.ServeMux) {
 	server.HandleFunc("GET /processes/", func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "text/json; charset=utf-8")
+		w.Header().Set("Content-Type", "application/json; charset=utf-8")
 		allowed := security.ValidateToken(*r)
 		if !allowed {
 			http.Error(w, "Token invalid", http.StatusUnauthorized)
@@ -28,7 +28,7 @@ func GetProcesses(server *http.ServeMux) {
 
 func GetProcess(server *http.ServeMux) {
 	server.HandleFunc("GET /processes/{pid}/", func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "text/json; charset=utf-8")
+		w.Header().Set("Content-Type", "application/json; charset=utf-8")
 		allowed := security.ValidateToken(*r)
 		if !allowed {
 			http.Error(w, "Token invalid", http.StatusUnauthorized)

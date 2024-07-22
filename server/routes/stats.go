@@ -15,7 +15,7 @@ func GetCPU(server *http.ServeMux) {
 	}
 
 	server.HandleFunc("GET /stats/cpu/", func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "text/json; charset=utf-8")
+		w.Header().Set("Content-Type", "application/json; charset=utf-8")
 		allowed := security.ValidateToken(*r)
 		if !allowed {
 			http.Error(w, "Token invalid", http.StatusUnauthorized)
@@ -39,7 +39,7 @@ func GetMemory(server *http.ServeMux) {
 	}
 
 	server.HandleFunc("GET /stats/memory/", func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "text/json; charset=utf-8")
+		w.Header().Set("Content-Type", "application/json; charset=utf-8")
 		allowed := security.ValidateToken(*r)
 		if !allowed {
 			http.Error(w, "Token invalid", http.StatusUnauthorized)
