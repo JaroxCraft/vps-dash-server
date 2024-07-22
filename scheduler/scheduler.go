@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-const snapshotInterval = 30 * time.Second
+const snapshotInterval = 10 * time.Second
 
 func Start() *tasks.Scheduler {
 	scheduler := tasks.New()
