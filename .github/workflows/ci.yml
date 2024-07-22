@@ -1,4 +1,4 @@
-name: golangci-lint
+name: ci
 on:
   push:
     branches:
@@ -13,6 +13,17 @@ permissions:
   issues: write
 
 jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: 1.22.5
+      - run: go build .
+
+
   golangci:
     name: lint
     runs-on: ubuntu-latest

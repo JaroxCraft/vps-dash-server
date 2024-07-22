@@ -33,3 +33,21 @@ func GetProcesses() []Process {
 
 	return processes
 }
+
+func GetProcess(pid int32) Process { // TODO: make cleaner and faster
+	processes := getPSProcesses()
+	for _, psProcess := range processes {
+		if psProcess.Pid == pid {
+			name, err := psProcess.Name()
+			if err != nil {
+				logger.Get().Errorf("Error while fetching process name: %v", err)
+			}
+
+			return Process{
+				Pid:  psProcess.Pid,
+				Name: name,
+			}
+		}
+	}
+	return Process{}
+}
