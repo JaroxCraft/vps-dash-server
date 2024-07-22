@@ -13,8 +13,8 @@ type Snapshot struct {
 	CaptureTime   time.Time `json:"time"`
 	CPUPercentage uint8     `json:"cpu_percent"`
 	MemPercentage uint8     `json:"mem_percent"`
-	MemTotal      uint64    `json:"mem_total"` // Bytes
 	MemUsed       uint64    `json:"mem_used"`  // Bytes
+	MemTotal      uint64    `json:"mem_total"` // Bytes
 }
 
 func GetSnapshots() []Snapshot {

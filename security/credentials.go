@@ -8,21 +8,25 @@ import (
 	"strings"
 )
 
-var noAuthEnvError = errors.New("no auth ENV")
+var errNoAuth = errors.New("no AUTH_TOKEN ENV")
 var authToken = ""
 
 const defaultAuthToken = "vps-dash"
 
+func Initialize() {
+	authToken = callAuthToken()
+}
+
 func GetAuthToken() string {
 	if authToken == "" {
-		authToken = CallAuthToken()
+		authToken = callAuthToken()
 	}
 	return authToken
 }
 
-func CallAuthToken() string {
+func callAuthToken() string {
 	env, err := getAuthEnv()
-	if err != nil && errors.Is(err, noAuthEnvError) {
+	if err != nil && errors.Is(err, errNoAuth) {
 		logger.Get().Warnf("No auth ENV set, using default of %s", defaultAuthToken)
 		return defaultAuthToken
 	}
@@ -32,7 +36,7 @@ func CallAuthToken() string {
 func getAuthEnv() (string, error) {
 	authToken := os.Getenv("AUTH_TOKEN")
 	if authToken == "" {
-		return "", noAuthEnvError
+		return "", errNoAuth
 	}
 	return authToken, nil
 }

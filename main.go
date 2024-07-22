@@ -21,7 +21,7 @@ func main() {
 	tasks := scheduler.Start()
 	defer tasks.Stop()
 
-	security.CallAuthToken()
+	security.Initialize()
 
 	server.NewWithRoutes()
 	server.Start()
