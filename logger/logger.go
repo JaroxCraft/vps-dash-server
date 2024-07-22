@@ -21,8 +21,9 @@ func create() *zap.SugaredLogger {
 	config.Level.SetLevel(zapcore.DebugLevel)
 	config.EncoderConfig.EncodeLevel = zapcore.CapitalColorLevelEncoder
 	config.EncoderConfig.EncodeTime = zapcore.TimeEncoderOfLayout(time.Kitchen)
+	config.DisableStacktrace = true
 
-	created, err := config.Build()
+	created, err := config.Build(zap.AddStacktrace(zapcore.ErrorLevel))
 	if err != nil {
 		log.Fatalf("can't initialize zap logger: %v", err)
 	}

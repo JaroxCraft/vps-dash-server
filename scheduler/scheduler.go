@@ -1,6 +1,8 @@
 package scheduler
 
 import (
+	"github.com/fatih/color"
+	"github.com/jaroxcraft/vps-dash-server/colors"
 	"github.com/jaroxcraft/vps-dash-server/logger"
 	"github.com/madflojo/tasks"
 	"os"
@@ -21,7 +23,7 @@ func Start() *tasks.Scheduler {
 		logger.Get().Fatalf("Error while Starting Snapshot Scheduler: %v", err)
 	}
 
-	logger.Get().Infof("Snapshot Scheduler started with id %s", id)
+	logger.Get().Infof("Snapshot-Scheduler started with id %s", colors.S(color.FgYellow, id))
 
 	return scheduler
 }
