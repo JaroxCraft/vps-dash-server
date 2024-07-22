@@ -13,6 +13,6 @@ func Memory() *mem.VirtualMemoryStat {
 	return memory
 }
 
-func MemoryPercent() uint8 {
+func MemoryUsage() uint8 {
 	return uint8(Memory().UsedPercent)
 }

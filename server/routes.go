@@ -6,4 +6,6 @@ func RegisterRoutes() {
 	routes.GetSnapshots(server)
 	routes.GetProcesses(server)
 	routes.GetProcess(server)
+	routes.GetCPU(server)
+	routes.GetMemory(server)
 }

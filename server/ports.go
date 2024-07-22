@@ -14,7 +14,7 @@ const defaultPort = 8080
 func GetAPIPort() uint16 {
 	port, err := getEnvPort()
 	if err == nil {
-		logger.Get().Infof("Found valid API_PORT ENV: %s , using it", colors.S(color.FgBlue, strconv.Itoa(int(port))))
+		logger.Get().Infof("Found valid API_PORT ENV: %s, using it", colors.S(color.FgBlue, strconv.Itoa(int(port))))
 		return port
 	}
 	logger.Get().Warnf("%v, starting on default port %s", err, colors.S(color.FgBlue, strconv.Itoa(defaultPort)))
