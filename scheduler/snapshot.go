@@ -40,7 +40,6 @@ func TakeSnapshot() error {
 
 	logger.Get().Debug("taking snapshot")
 
-	// TODO: Get real values
 	var snapshot = Snapshot{
 		CaptureTime:   time.Now(),
 		CpuPercentage: system.GetCpuUsage(),
