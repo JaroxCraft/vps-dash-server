@@ -9,7 +9,7 @@ import (
 )
 
 func RegisterRoutes() {
-	Server().HandleFunc("GET /snapshots", func(writer http.ResponseWriter, request *http.Request) {
+	Server().HandleFunc("GET /snapshots", func(writer http.ResponseWriter, _ *http.Request) {
 		writer.Header().Set("Content-Type", "text/json; charset=utf-8")
 		err := json.NewEncoder(writer).Encode(scheduler.GetSnapshots())
 		if err != nil {
@@ -18,7 +18,7 @@ func RegisterRoutes() {
 		}
 	})
 
-	Server().HandleFunc("GET /processes", func(writer http.ResponseWriter, request *http.Request) {
+	Server().HandleFunc("GET /processes", func(writer http.ResponseWriter, _ *http.Request) {
 		writer.Header().Set("Content-Type", "text/json; charset=utf-8")
 		err := json.NewEncoder(writer).Encode(system.GetProcesses())
 		if err != nil {
