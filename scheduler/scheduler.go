@@ -2,7 +2,6 @@ package scheduler
 
 import (
 	"github.com/jaroxcraft/vps-dash-server/logger"
-	_ "github.com/joho/godotenv/autoload"
 	"github.com/madflojo/tasks"
 	"os"
 	"time"

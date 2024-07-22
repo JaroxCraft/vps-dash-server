@@ -5,6 +5,7 @@ import (
 	"github.com/jaroxcraft/vps-dash-server/scheduler"
 	"github.com/jaroxcraft/vps-dash-server/server"
 	"github.com/jaroxcraft/vps-dash-server/system"
+	_ "github.com/joho/godotenv/autoload"
 )
 
 func main() {

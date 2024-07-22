@@ -1,6 +1,7 @@
 package server
 
 import (
+	"fmt"
 	"github.com/jaroxcraft/vps-dash-server/logger"
 	"net/http"
 )
@@ -26,7 +27,7 @@ func NewWithRoutes() *http.ServeMux {
 }
 
 func Start() {
-	err := http.ListenAndServe(":8080", server)
+	err := http.ListenAndServe(fmt.Sprintf(":%d", GetAPIPort()), server)
 	if err != nil {
 		logger.Get().Fatalf("Error while starting server: %s", err)
 	}
