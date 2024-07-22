@@ -1,6 +1,7 @@
 package scheduler
 
 import (
+	"encoding/json"
 	"github.com/jaroxcraft/vps-dash-server/logger"
 	"github.com/jaroxcraft/vps-dash-server/system"
 	"time"
@@ -38,8 +39,6 @@ func AddSnapshot(snapshot *Snapshot) {
 
 func TakeSnapshot() error {
 
-	logger.Get().Debug("taking snapshot")
-
 	var snapshot = Snapshot{
 		CaptureTime:   time.Now(),
 		CPUPercentage: system.GetCPUUsage(),
@@ -47,6 +46,9 @@ func TakeSnapshot() error {
 		MemTotal:      system.Memory().Total,
 		MemUsed:       system.Memory().Used,
 	}
+
+	jsonSnapshot, _ := json.Marshal(snapshot)
+	logger.Get().Debugf("Snapshot taken: %s", string(jsonSnapshot))
 
 	AddSnapshot(&snapshot)
 	return nil

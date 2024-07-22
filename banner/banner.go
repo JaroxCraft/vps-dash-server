@@ -23,8 +23,8 @@ func colorize(banner string) string {
 }
 
 func replaceInfo(banner string) string {
-	banner = strings.Replace(banner, "${name}", colors.S(color.ReverseVideo, info.GetInfo().Name), -1)
-	banner = strings.Replace(banner, "${version}", colors.S(color.Italic, info.GetInfo().Version), -1)
+	banner = strings.ReplaceAll(banner, "${name}", colors.S(color.ReverseVideo, info.GetInfo().Name))
+	banner = strings.ReplaceAll(banner, "${version}", colors.S(color.Italic, info.GetInfo().Version))
 
 	return banner
 }
