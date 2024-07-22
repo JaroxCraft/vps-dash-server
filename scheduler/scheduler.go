@@ -37,7 +37,7 @@ func GetSnapshotInterval() time.Duration {
 	// TODO: hint in documentation
 	parsedInterval, err := time.ParseDuration(intervalEnv)
 	if err != nil {
-		logger.Get().Errorf("Failed to parse snapshot interval from env, falling back to default of %s: %v", snapshotInterval.String(), err)
+		logger.Get().Errorf("Failed to parse snapshot interval from ENV, falling back to default of %s: %v", snapshotInterval.String(), err)
 		return snapshotInterval
 	}
 	return parsedInterval

@@ -4,6 +4,7 @@ import (
 	"github.com/jaroxcraft/vps-dash-server/banner"
 	"github.com/jaroxcraft/vps-dash-server/logger"
 	"github.com/jaroxcraft/vps-dash-server/scheduler"
+	"github.com/jaroxcraft/vps-dash-server/security"
 	"github.com/jaroxcraft/vps-dash-server/server"
 	_ "github.com/joho/godotenv/autoload"
 )
@@ -19,6 +20,8 @@ func main() {
 
 	tasks := scheduler.Start()
 	defer tasks.Stop()
+
+	security.CallAuthToken()
 
 	server.NewWithRoutes()
 	server.Start()
