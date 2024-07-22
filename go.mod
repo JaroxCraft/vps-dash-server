@@ -5,8 +5,11 @@ go 1.22.4
 require github.com/joho/godotenv v1.5.1
 
 require (
+	github.com/fatih/color v1.17.0 // indirect
 	github.com/go-ole/go-ole v1.3.0 // indirect
 	github.com/madflojo/tasks v1.2.0 // indirect
+	github.com/mattn/go-colorable v0.1.13 // indirect
+	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/rs/xid v1.5.0 // indirect
 	github.com/shirou/gopsutil v3.21.11+incompatible // indirect
 	github.com/tklauser/go-sysconf v0.3.14 // indirect

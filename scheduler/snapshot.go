@@ -10,9 +10,10 @@ var snapshots = make([]Snapshot, 8)
 
 type Snapshot struct {
 	CaptureTime   time.Time `json:"time"`
-	CpuPercentage uint8     `json:"cpu"`
-	MemPercentage uint8     `json:"mem"`
-	MemUsed       uint64    `json:"memUsed"` // MB
+	CpuPercentage uint8     `json:"cpu_percent"`
+	MemPercentage uint8     `json:"mem_percent"`
+	MemTotal      uint64    `json:"mem_total"` // Bytes
+	MemUsed       uint64    `json:"mem_used"`  // Bytes
 }
 
 func GetSnapshots() []Snapshot {
@@ -44,6 +45,7 @@ func TakeSnapshot() error {
 		CaptureTime:   time.Now(),
 		CpuPercentage: system.GetCpuUsage(),
 		MemPercentage: system.MemoryPercent(),
+		MemTotal:      system.Memory().Total,
 		MemUsed:       system.Memory().Used,
 	}
 
