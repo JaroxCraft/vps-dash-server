@@ -11,12 +11,17 @@ import (
 	"github.com/madflojo/tasks"
 )
 
-const snapshotInterval = 10 * time.Second
+const (
+	snapshotTaskName = "snapshot"
+	snapshotInterval = 1 * time.Minute
+	cacheTaskName    = "cache"
+	cacheInterval    = 10 * time.Second
+)
 
 func Start() *tasks.Scheduler {
 	scheduler := tasks.New()
 
-	id, err := scheduler.Add(&tasks.Task{
+	err := scheduler.AddWithID(snapshotTaskName, &tasks.Task{
 		StartAfter: time.Now(),
 		Interval:   GetSnapshotInterval(),
 		TaskFunc:   TakeSnapshot,
@@ -25,9 +30,37 @@ func Start() *tasks.Scheduler {
 		logger.Get().Fatalf("Error while Starting Snapshot Scheduler: %v", err)
 	}
 
-	logger.Get().Infof("Snapshot-Scheduler started with id %s", colors.S(color.FgYellow, id))
+	logger.Get().Infof("Snapshot-Scheduler started with id %s", colors.S(color.FgYellow, snapshotTaskName))
+
+	err = scheduler.AddWithID(cacheTaskName, &tasks.Task{
+		StartAfter: time.Now(),
+		Interval:   GetCacheInterval(),
+		TaskFunc:   system.Cache,
+	})
+	if err != nil {
+		logger.Get().Fatalf("Error while Starting Snapshot Scheduler: %v", err)
+	}
+
+	logger.Get().Infof("Cache-Scheduler started with id %s", colors.S(color.FgYellow, cacheTaskName))
 
 	return scheduler
+}
+
+func GetCacheInterval() time.Duration {
+	intervalEnv := os.Getenv("CACHE_INTERVAL")
+	if intervalEnv == "" {
+		return snapshotInterval
+	}
+
+	// TODO: hint in documentation
+	parsedInterval, err := time.ParseDuration(intervalEnv)
+	if err != nil {
+		logger.Get().Errorf("Failed to parse cache interval from ENV, falling back to default of %s: %v", cacheInterval.String(), err)
+
+		return cacheInterval
+	}
+
+	return parsedInterval
 }
 
 func GetSnapshotInterval() time.Duration {
