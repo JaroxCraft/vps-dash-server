@@ -1,12 +1,14 @@
 package scheduler
 
 import (
+	"os"
+	"time"
+
 	"github.com/fatih/color"
 	"github.com/jaroxcraft/vps-dash-server/colors"
 	"github.com/jaroxcraft/vps-dash-server/logger"
+	"github.com/jaroxcraft/vps-dash-server/system"
 	"github.com/madflojo/tasks"
-	"os"
-	"time"
 )
 
 const snapshotInterval = 10 * time.Second
@@ -38,7 +40,9 @@ func GetSnapshotInterval() time.Duration {
 	parsedInterval, err := time.ParseDuration(intervalEnv)
 	if err != nil {
 		logger.Get().Errorf("Failed to parse snapshot interval from ENV, falling back to default of %s: %v", snapshotInterval.String(), err)
+
 		return snapshotInterval
 	}
+
 	return parsedInterval
 }

@@ -10,6 +10,7 @@ func Memory() *mem.VirtualMemoryStat {
 	if err != nil {
 		logger.Get().Errorf("Error getting memory info: %v", err)
 	}
+
 	return memory
 }
 

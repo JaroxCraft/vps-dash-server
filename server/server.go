@@ -2,27 +2,23 @@ package server
 
 import (
 	"fmt"
-	"github.com/jaroxcraft/vps-dash-server/logger"
 	"net/http"
+
+	"github.com/jaroxcraft/vps-dash-server/logger"
 )
 
 var server *http.ServeMux
 
 func New() *http.ServeMux {
 	server = http.NewServeMux()
-	return server
-}
 
-func Server() *http.ServeMux {
-	if server == nil {
-		return New()
-	}
 	return server
 }
 
 func NewWithRoutes() *http.ServeMux {
 	New()
 	RegisterRoutes()
+
 	return server
 }
 

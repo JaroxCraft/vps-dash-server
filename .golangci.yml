@@ -1,0 +1,29 @@
+run:
+  concurrency: 6
+  timeout: 4m
+  go: 1.22.5
+
+linters:
+  disable:
+    - goimports
+    - depguard
+    - godox
+    - lll
+  presets:
+    - bugs
+    - comment
+    - complexity
+    - error
+    - format
+    - import
+    - metalinter
+    - module
+    - performance
+    - sql
+    - style
+    - test
+    - unused
+  fast: true
+
+severity:
+  default-severity: warning

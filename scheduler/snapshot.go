@@ -2,19 +2,24 @@ package scheduler
 
 import (
 	"encoding/json"
+	"time"
+
 	"github.com/jaroxcraft/vps-dash-server/logger"
 	"github.com/jaroxcraft/vps-dash-server/system"
-	"time"
 )
 
-var snapshots = make([]Snapshot, 8)
+const (
+	snapshotCount = 8
+)
+
+var snapshots = make([]Snapshot, snapshotCount)
 
 type Snapshot struct {
 	CaptureTime   time.Time `json:"time"`
-	CPUPercentage uint8     `json:"cpu_percent"`
-	MemPercentage uint8     `json:"mem_percent"`
-	MemUsed       uint64    `json:"mem_used"`  // Bytes
-	MemTotal      uint64    `json:"mem_total"` // Bytes
+	CPUPercentage uint8     `json:"cpuPercent"`
+	MemPercentage uint8     `json:"memPercentage"`
+	MemUsed       uint64    `json:"memUsed"`  // Bytes
+	MemTotal      uint64    `json:"memTotal"` // Bytes
 }
 
 func GetSnapshots() []Snapshot {
@@ -22,7 +27,7 @@ func GetSnapshots() []Snapshot {
 }
 
 func AddSnapshot(snapshot *Snapshot) {
-	var newSnapshots = make([]Snapshot, 8)
+	newSnapshots := make([]Snapshot, snapshotCount)
 	newSnapshots[0] = *snapshot
 
 	for i, s := range snapshots {
@@ -34,12 +39,12 @@ func AddSnapshot(snapshot *Snapshot) {
 
 		newSnapshots[newIndex] = s
 	}
+
 	snapshots = newSnapshots
 }
 
 func TakeSnapshot() error {
-
-	var snapshot = Snapshot{
+	snapshot := Snapshot{
 		CaptureTime:   time.Now(),
 		CPUPercentage: system.GetCPUUsage(),
 		MemPercentage: system.MemoryUsage(),
@@ -48,8 +53,9 @@ func TakeSnapshot() error {
 	}
 
 	jsonSnapshot, _ := json.Marshal(snapshot)
-	logger.Get().Debugf("Snapshot taken: %s", string(jsonSnapshot))
+	logger.Get().Debugf("Took Snapshot: %s", string(jsonSnapshot))
 
 	AddSnapshot(&snapshot)
+
 	return nil
 }

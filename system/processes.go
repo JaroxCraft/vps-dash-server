@@ -2,6 +2,7 @@ package system
 
 import (
 	"fmt"
+
 	"github.com/jaroxcraft/vps-dash-server/logger"
 	"github.com/shirou/gopsutil/process"
 )
@@ -16,6 +17,7 @@ func getPSProcesses() []*process.Process {
 	if err != nil {
 		logger.Get().Errorf("Error while fetching processes: %v", err)
 	}
+
 	return processes
 }
 
@@ -53,5 +55,6 @@ func GetProcess(pid int32) (Process, error) {
 			Name: name,
 		}, nil
 	}
+
 	return Process{}, fmt.Errorf("process with pid %d not found", pid)
 }

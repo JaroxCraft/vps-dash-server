@@ -2,10 +2,11 @@ package system
 
 import (
 	"fmt"
-	"github.com/jaroxcraft/vps-dash-server/logger"
-	"github.com/shirou/gopsutil/cpu"
 	"math"
 	"time"
+
+	"github.com/jaroxcraft/vps-dash-server/logger"
+	"github.com/shirou/gopsutil/cpu"
 )
 
 func cpuUsage() (float64, error) {
@@ -18,6 +19,7 @@ func cpuUsage() (float64, error) {
 	if len(percentages) == 0 {
 		return 0, fmt.Errorf("no cpu data available")
 	}
+
 	return percentages[0], nil
 }
 
@@ -26,5 +28,6 @@ func GetCPUUsage() uint8 {
 	if err != nil {
 		logger.Get().Errorf("Error while getting cpu usage: %v", err)
 	}
+
 	return uint8(math.Ceil(percentage))
 }

@@ -1,10 +1,11 @@
 package logger
 
 import (
-	"go.uber.org/zap"
-	"go.uber.org/zap/zapcore"
 	"log"
 	"time"
+
+	"go.uber.org/zap"
+	"go.uber.org/zap/zapcore"
 )
 
 var logger *zap.SugaredLogger
@@ -13,6 +14,7 @@ func Get() *zap.SugaredLogger {
 	if logger == nil {
 		create()
 	}
+
 	return logger
 }
 
@@ -29,5 +31,6 @@ func create() *zap.SugaredLogger {
 	}
 
 	logger = created.Sugar()
+
 	return logger
 }

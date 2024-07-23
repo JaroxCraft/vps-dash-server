@@ -1,12 +1,13 @@
 package banner
 
 import (
-	"github.com/fatih/color"
-	"github.com/jaroxcraft/vps-dash-server/colors"
-	"github.com/jaroxcraft/vps-dash-server/info"
 	"io"
 	"os"
 	"strings"
+
+	"github.com/fatih/color"
+	"github.com/jaroxcraft/vps-dash-server/colors"
+	"github.com/jaroxcraft/vps-dash-server/info"
 )
 
 const defaultBanner = ""
@@ -39,6 +40,7 @@ func getBanner() string {
 	if err != nil {
 		return defaultBanner
 	}
+
 	bannerS := string(bannerB)
 
 	if !strings.HasSuffix(bannerS, "\n") {
