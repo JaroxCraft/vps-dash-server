@@ -47,7 +47,7 @@ func TakeSnapshot() error {
 	snapshot := Snapshot{
 		CaptureTime:   time.Now(),
 		CPUPercentage: system.GetCPUUsage(),
-		MemPercentage: system.MemoryUsage(),
+		MemPercentage: system.GetCachedMemoryUsage(),
 		MemTotal:      system.Memory().Total,
 		MemUsed:       system.Memory().Used,
 	}

@@ -5,6 +5,8 @@ import (
 	"github.com/shirou/gopsutil/mem"
 )
 
+var memoryUsageCache int8 = -1
+
 func Memory() *mem.VirtualMemoryStat {
 	memory, err := mem.VirtualMemory()
 	if err != nil {
@@ -14,6 +16,18 @@ func Memory() *mem.VirtualMemoryStat {
 	return memory
 }
 
-func MemoryUsage() uint8 {
+func GetMemoryUsage() uint8 {
 	return uint8(Memory().UsedPercent)
+}
+
+func cacheMemoryUsage(usage uint8) {
+	memoryUsageCache = int8(usage)
+}
+
+func GetCachedMemoryUsage() uint8 {
+	if memoryUsageCache == -1 {
+		cacheMemoryUsage(GetMemoryUsage())
+	}
+
+	return uint8(memoryUsageCache)
 }

@@ -50,7 +50,7 @@ func GetMemory(server *http.ServeMux) {
 			return
 		}
 
-		response := Response{system.MemoryUsage()}
+		response := Response{system.GetCachedMemoryUsage()}
 
 		err := json.NewEncoder(w).Encode(response)
 		if err != nil {
