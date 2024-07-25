@@ -17,7 +17,7 @@ var snapshots = make([]Snapshot, SnapshotCount)
 type Snapshot struct {
 	CaptureTime   time.Time `json:"time"`
 	CPUPercentage uint8     `json:"cpuPercent"`
-	MemPercentage uint8     `json:"memPercentage"`
+	MemPercentage uint8     `json:"memPercent"`
 	MemUsed       uint64    `json:"memUsed"`  // Bytes
 	MemTotal      uint64    `json:"memTotal"` // Bytes
 }
