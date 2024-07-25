@@ -1,12 +1,13 @@
 package scheduler_test
 
 import (
-	"github.com/jaroxcraft/vps-dash-server/scheduler"
 	"testing"
 	"time"
+
+	"github.com/jaroxcraft/vps-dash-server/scheduler"
 )
 
-// Adds a new snapshot to the beginning of the snapshot array
+// Adds a new snapshot to the beginning of the snapshot array.
 func TestAddSnapshotAddsToBeginning(t *testing.T) {
 	snapshot := &scheduler.Snapshot{
 		CaptureTime:   time.Now(),
@@ -23,7 +24,7 @@ func TestAddSnapshotAddsToBeginning(t *testing.T) {
 	}
 }
 
-// Shifts existing snapshots to the right by one position
+// Shifts existing snapshots to the right by one position.
 func TestAddSnapshotShiftsExistingSnapshots(t *testing.T) {
 	initialSnapshot := &scheduler.Snapshot{
 		CaptureTime:   time.Now(),
@@ -50,9 +51,9 @@ func TestAddSnapshotShiftsExistingSnapshots(t *testing.T) {
 	}
 }
 
-// Maintains the fixed size of the snapshot array
+// Maintains the fixed size of the snapshot array.
 func TestAddSnapshotMaintainsFixedSize(t *testing.T) {
-	for i := 0; i < 10; i++ {
+	for i := range scheduler.SnapshotCount {
 		snapshot := &scheduler.Snapshot{
 			CaptureTime:   time.Now().Add(time.Duration(i) * time.Minute),
 			CPUPercentage: uint8(i * 10),
@@ -68,9 +69,9 @@ func TestAddSnapshotMaintainsFixedSize(t *testing.T) {
 	}
 }
 
-// Handles the addition of a snapshot when the array is already full
+// Handles the addition of a snapshot when the array is already full.
 func TestAddSnapshotWhenArrayIsFull(t *testing.T) {
-	for i := 0; i < scheduler.SnapshotCount; i++ {
+	for i := range scheduler.SnapshotCount {
 		snapshot := &scheduler.Snapshot{
 			CaptureTime:   time.Now().Add(time.Duration(i) * time.Minute),
 			CPUPercentage: uint8(i * 10),
@@ -96,7 +97,7 @@ func TestAddSnapshotWhenArrayIsFull(t *testing.T) {
 	}
 }
 
-// Correctly shifts snapshots when the array contains only one snapshot
+// Correctly shifts snapshots when the array contains only one snapshot.
 func TestAddSnapshotWithOneExistingSnapshot(t *testing.T) {
 	initialSnapshot := &scheduler.Snapshot{
 		CaptureTime:   time.Now(),
@@ -123,7 +124,7 @@ func TestAddSnapshotWithOneExistingSnapshot(t *testing.T) {
 	}
 }
 
-// Handles the addition of a snapshot when the array is empty
+// Handles the addition of a snapshot when the array is empty.
 func TestAddSnapshotWhenArrayIsEmpty(t *testing.T) {
 	snapshot := &scheduler.Snapshot{
 		CaptureTime:   time.Now(),

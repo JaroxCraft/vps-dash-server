@@ -10,7 +10,7 @@ import (
 	"github.com/jaroxcraft/vps-dash-server/logger"
 )
 
-const defaultPort = 8080
+const DefaultPort = 8080
 
 func GetAPIPort() uint16 {
 	port, err := getEnvPort()
@@ -20,9 +20,9 @@ func GetAPIPort() uint16 {
 		return port
 	}
 
-	logger.Get().Warnf("%v, starting on default port %s", err, colors.S(color.FgBlue, strconv.Itoa(defaultPort)))
+	logger.Get().Warnf("%v, starting on default port %s", err, colors.S(color.FgBlue, strconv.Itoa(DefaultPort)))
 	// TODO: link to docs/reference
-	return defaultPort
+	return DefaultPort
 }
 
 func getEnvPort() (uint16, error) {
