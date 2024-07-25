@@ -9,10 +9,10 @@ import (
 )
 
 const (
-	snapshotCount = 8
+	SnapshotCount = 8
 )
 
-var snapshots = make([]Snapshot, snapshotCount)
+var snapshots = make([]Snapshot, SnapshotCount)
 
 type Snapshot struct {
 	CaptureTime   time.Time `json:"time"`
@@ -27,7 +27,7 @@ func GetSnapshots() []Snapshot {
 }
 
 func AddSnapshot(snapshot *Snapshot) {
-	newSnapshots := make([]Snapshot, snapshotCount)
+	newSnapshots := make([]Snapshot, SnapshotCount)
 	newSnapshots[0] = *snapshot
 
 	for i, s := range snapshots {

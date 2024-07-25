@@ -13,9 +13,9 @@ import (
 
 const (
 	snapshotTaskName = "snapshot"
-	snapshotInterval = 1 * time.Minute
+	SnapshotInterval = 1 * time.Minute
 	cacheTaskName    = "cache"
-	cacheInterval    = 10 * time.Second
+	CacheInterval    = 10 * time.Second
 )
 
 func Start() *tasks.Scheduler {
@@ -49,15 +49,15 @@ func Start() *tasks.Scheduler {
 func GetCacheInterval() time.Duration {
 	intervalEnv := os.Getenv("CACHE_INTERVAL")
 	if intervalEnv == "" {
-		return snapshotInterval
+		return SnapshotInterval
 	}
 
 	// TODO: hint in documentation
 	parsedInterval, err := time.ParseDuration(intervalEnv)
 	if err != nil {
-		logger.Get().Errorf("Failed to parse cache interval from ENV, falling back to default of %s: %v", cacheInterval.String(), err)
+		logger.Get().Errorf("Failed to parse cache interval from ENV, falling back to default of %s: %v", CacheInterval.String(), err)
 
-		return cacheInterval
+		return CacheInterval
 	}
 
 	return parsedInterval
@@ -66,15 +66,15 @@ func GetCacheInterval() time.Duration {
 func GetSnapshotInterval() time.Duration {
 	intervalEnv := os.Getenv("SNAPSHOT_INTERVAL")
 	if intervalEnv == "" {
-		return snapshotInterval
+		return SnapshotInterval
 	}
 
 	// TODO: hint in documentation
 	parsedInterval, err := time.ParseDuration(intervalEnv)
 	if err != nil {
-		logger.Get().Errorf("Failed to parse snapshot interval from ENV, falling back to default of %s: %v", snapshotInterval.String(), err)
+		logger.Get().Errorf("Failed to parse snapshot interval from ENV, falling back to default of %s: %v", SnapshotInterval.String(), err)
 
-		return snapshotInterval
+		return SnapshotInterval
 	}
 
 	return parsedInterval
