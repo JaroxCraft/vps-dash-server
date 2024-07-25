@@ -31,7 +31,7 @@ func GetAuthToken() string {
 func callAuthToken() string {
 	env, err := getAuthEnv()
 	if err != nil && errors.Is(err, errNoAuth) {
-		logger.Get().Warnf("No auth ENV set, using default of %s", defaultAuthToken)
+		logger.Get().Warnf("no auth ENV set, using default of %s", defaultAuthToken)
 
 		return defaultAuthToken
 	}
