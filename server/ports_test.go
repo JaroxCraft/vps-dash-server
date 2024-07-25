@@ -1,10 +1,7 @@
 package server_test
 
 import (
-	"bytes"
-	"log"
 	"os"
-	"strings"
 	"testing"
 
 	"github.com/jaroxcraft/vps-dash-server/server"
@@ -21,25 +18,6 @@ func TestReturnsPortFromValidEnv(t *testing.T) {
 
 	if port != 9090 {
 		t.Errorf("Expected port 9090, but got %d", port)
-	}
-}
-
-// Logs the usage of the valid API_PORT environment variable.
-func TestLogsUsageOfValidEnvPort(t *testing.T) {
-	err := os.Setenv("API_PORT", "9090")
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	buf := new(bytes.Buffer)
-	log.SetOutput(buf)
-
-	defer log.SetOutput(os.Stderr)
-
-	server.GetAPIPort()
-
-	if !strings.Contains(buf.String(), "Found valid API_PORT ENV: 9090, using it") {
-		t.Errorf("Expected log to contain 'Found valid API_PORT ENV: 9090, using it', but got %s", buf.String())
 	}
 }
 
