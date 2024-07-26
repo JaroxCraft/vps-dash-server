@@ -6,6 +6,7 @@ func Cache() error {
 	logger.Get().Debug("Updating Cache")
 
 	cacheCPUUsage(GetCPUUsage())
+	cacheMemoryUsage(GetMemoryUsage())
 
 	return nil
 }
