@@ -13,9 +13,9 @@ import (
 
 const (
 	snapshotTaskName = "snapshot"
-	SnapshotInterval = 1 * time.Minute
+	SnapshotInterval = 15 * time.Second
 	cacheTaskName    = "cache"
-	CacheInterval    = 10 * time.Second
+	CacheInterval    = 5 * time.Second
 )
 
 func Start() *tasks.Scheduler {
