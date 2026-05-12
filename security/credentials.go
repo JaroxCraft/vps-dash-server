@@ -10,42 +10,36 @@ import (
 )
 
 var (
-	errNoAuth = errors.New("no AUTH_TOKEN ENV")
+	errNoAuth = errors.New("no AUTH_TOKEN environment variable set")
 	authToken = ""
 )
 
-const defaultAuthToken = "vps-dash"
+func Initialize() error {
+	token, err := getAuthEnv()
+	if err != nil {
+		authToken = ""
 
-func Initialize() {
-	authToken = callAuthToken()
+		return err
+	}
+
+	authToken = token
+
+	logger.Get().Info("Security initialized with AUTH_TOKEN")
+
+	return nil
 }
 
 func GetAuthToken() string {
-	if authToken == "" {
-		authToken = callAuthToken()
-	}
-
 	return authToken
 }
 
-func callAuthToken() string {
-	env, err := getAuthEnv()
-	if err != nil && errors.Is(err, errNoAuth) {
-		logger.Get().Warnf("no auth ENV set, using default of %s", defaultAuthToken)
-
-		return defaultAuthToken
-	}
-
-	return env
-}
-
 func getAuthEnv() (string, error) {
-	authToken := os.Getenv("AUTH_TOKEN")
-	if authToken == "" {
+	token := os.Getenv("AUTH_TOKEN")
+	if token == "" {
 		return "", errNoAuth
 	}
 
-	return authToken, nil
+	return token, nil
 }
 
 func ValidateRequest(r http.Request) bool {

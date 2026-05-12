@@ -18,10 +18,12 @@ func main() {
 		}
 	}()
 
+	if err := security.Initialize(); err != nil {
+		logger.Get().Fatalf("Security initialization failed: %v", err)
+	}
+
 	tasks := scheduler.Start()
 	defer tasks.Stop()
-
-	security.Initialize()
 
 	server.NewWithRoutes()
 	server.Start()
