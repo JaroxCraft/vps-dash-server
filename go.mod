@@ -7,7 +7,7 @@ require (
 	github.com/joho/godotenv v1.5.1
 	github.com/madflojo/tasks v1.2.0
 	github.com/shirou/gopsutil v3.21.11+incompatible
-	go.uber.org/zap v1.27.0
+	go.uber.org/zap v1.28.0
 )
 
 require (
