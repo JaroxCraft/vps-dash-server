@@ -23,6 +23,6 @@ func main() {
 
 	security.Initialize()
 
-	server.NewWithRoutes()
-	server.Start()
+	mux := server.NewWithRoutes()
+	server.Start(mux)
 }
