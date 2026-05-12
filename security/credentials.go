@@ -18,6 +18,7 @@ func Initialize() error {
 	token, err := getAuthEnv()
 	if err != nil {
 		authToken = ""
+
 		return err
 	}
 
