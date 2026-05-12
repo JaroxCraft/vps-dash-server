@@ -3,5 +3,14 @@
   "extends": [
     "config:recommended",
     ":semanticCommits"
+  ],
+  "packageRules": [
+    {
+      "groupName": "golangci-lint ecosystem",
+      "matchPackageNames": [
+        "golangci/golangci-lint",
+        "golangci/golangci-lint-action"
+      ]
+    }
   ]
 }
