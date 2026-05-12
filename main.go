@@ -25,6 +25,8 @@ func main() {
 	tasks := scheduler.Start()
 	defer tasks.Stop()
 
-	server.NewWithRoutes()
-	server.Start()
+	security.Initialize()
+
+	mux := server.NewWithRoutes()
+	server.Start(mux)
 }

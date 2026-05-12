@@ -36,5 +36,9 @@ func getEnvPort() (uint16, error) {
 		return 0, fmt.Errorf("invalid API_PORT ENV")
 	}
 
+	if port == 0 {
+		return 0, fmt.Errorf("API_PORT cannot be 0")
+	}
+
 	return uint16(port), nil
 }

@@ -1,11 +1,15 @@
 package server
 
-import "github.com/jaroxcraft/vps-dash-server/server/routes"
+import (
+	"net/http"
 
-func RegisterRoutes() {
-	routes.GetSnapshots(server)
-	routes.GetProcesses(server)
-	routes.GetProcess(server)
-	routes.GetCPU(server)
-	routes.GetMemory(server)
+	"github.com/jaroxcraft/vps-dash-server/server/routes"
+)
+
+func RegisterRoutes(mux *http.ServeMux) {
+	routes.GetSnapshots(mux)
+	routes.GetProcesses(mux)
+	routes.GetProcess(mux)
+	routes.GetCPU(mux)
+	routes.GetMemory(mux)
 }
