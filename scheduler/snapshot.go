@@ -27,10 +27,13 @@ func GetSnapshots() []Snapshot {
 }
 
 func AddSnapshot(snapshot *Snapshot) {
-	snapshots = append([]Snapshot{*snapshot}, snapshots...)
-	if len(snapshots) > SnapshotCount {
-		snapshots = snapshots[:SnapshotCount]
+	if len(snapshots) < SnapshotCount {
+		snapshots = append(snapshots, Snapshot{})
+		copy(snapshots[1:], snapshots[0:len(snapshots)-1])
+	} else {
+		copy(snapshots[1:], snapshots[0:SnapshotCount-1])
 	}
+	snapshots[0] = *snapshot
 }
 
 func TakeSnapshot() error {
