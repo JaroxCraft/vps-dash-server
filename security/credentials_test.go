@@ -17,6 +17,7 @@ func TestValidRequestWithCorrectBearerToken(t *testing.T) {
 	}
 
 	req.Header.Set("Authorization", "Bearer vps-dash")
+
 	if err := security.Initialize(); err != nil {
 		t.Fatal(err)
 	}
@@ -54,6 +55,7 @@ func TestRequestWithAuthorizationHeaderButNoBearerToken(t *testing.T) {
 	}
 
 	req.Header.Set("Authorization", "Basic password")
+
 	if err := security.Initialize(); err != nil {
 		t.Fatal(err)
 	}
@@ -73,6 +75,7 @@ func TestRequestWithAuthorizationHeaderButEmptyBearerToken(t *testing.T) {
 	}
 
 	req.Header.Set("Authorization", "Bearer ")
+
 	if err := security.Initialize(); err != nil {
 		t.Fatal(err)
 	}
@@ -92,6 +95,7 @@ func TestRequestWithAuthorizationHeaderButIncorrectTokenFormat(t *testing.T) {
 	}
 
 	req.Header.Set("Authorization", "Bearer1234")
+
 	if err := security.Initialize(); err != nil {
 		t.Fatal(err)
 	}

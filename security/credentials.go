@@ -17,10 +17,12 @@ var (
 func Initialize() error {
 	token, err := getAuthEnv()
 	if err != nil {
+		authToken = ""
 		return err
 	}
 
 	authToken = token
+
 	logger.Get().Info("Security initialized with AUTH_TOKEN")
 
 	return nil
