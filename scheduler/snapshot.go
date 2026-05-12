@@ -12,7 +12,7 @@ const (
 	SnapshotCount = 8
 )
 
-var snapshots = make([]Snapshot, SnapshotCount)
+var snapshots = make([]Snapshot, 0, SnapshotCount)
 
 type Snapshot struct {
 	CaptureTime   time.Time `json:"time"`
@@ -27,33 +27,32 @@ func GetSnapshots() []Snapshot {
 }
 
 func AddSnapshot(snapshot *Snapshot) {
-	newSnapshots := make([]Snapshot, SnapshotCount)
-	newSnapshots[0] = *snapshot
-
-	for i, s := range snapshots {
-		newIndex := i + 1
-
-		if newIndex >= len(newSnapshots) {
-			break
-		}
-
-		newSnapshots[newIndex] = s
+	if len(snapshots) < SnapshotCount {
+		snapshots = append(snapshots, Snapshot{})
+		copy(snapshots[1:], snapshots[0:len(snapshots)-1])
+	} else {
+		copy(snapshots[1:], snapshots[0:SnapshotCount-1])
 	}
 
-	snapshots = newSnapshots
+	snapshots[0] = *snapshot
 }
 
 func TakeSnapshot() error {
+	mem := system.Memory()
 	snapshot := Snapshot{
 		CaptureTime:   time.Now(),
 		CPUPercentage: system.GetCPUUsage(),
 		MemPercentage: system.GetCachedMemoryUsage(),
-		MemTotal:      system.Memory().Total,
-		MemUsed:       system.Memory().Used,
+		MemTotal:      mem.Total,
+		MemUsed:       mem.Used,
 	}
 
-	jsonSnapshot, _ := json.Marshal(snapshot)
-	logger.Get().Debugf("Took Snapshot: %s", string(jsonSnapshot))
+	jsonSnapshot, err := json.Marshal(snapshot)
+	if err != nil {
+		logger.Get().Warnf("Failed marshaling snapshot: %v", err)
+	} else {
+		logger.Get().Debugf("Took Snapshot: %s", string(jsonSnapshot))
+	}
 
 	AddSnapshot(&snapshot)
 

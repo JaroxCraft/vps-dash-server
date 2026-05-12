@@ -50,7 +50,7 @@ func GetProcess(server *http.ServeMux) {
 
 		pid, err := strconv.ParseInt(pidStr, 0, 32)
 		if err != nil {
-			http.Error(w, "Error parsing path param \"pid\"", http.StatusBadRequest|http.StatusInternalServerError)
+			http.Error(w, "Error parsing path param \"pid\"", http.StatusBadRequest)
 
 			return
 		}
