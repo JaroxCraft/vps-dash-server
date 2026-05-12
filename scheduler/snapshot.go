@@ -33,6 +33,7 @@ func AddSnapshot(snapshot *Snapshot) {
 	} else {
 		copy(snapshots[1:], snapshots[0:SnapshotCount-1])
 	}
+
 	snapshots[0] = *snapshot
 }
 
