@@ -50,8 +50,8 @@ All endpoints require an `Authorization: Bearer <AUTH_TOKEN>` header.
 
 | Method | Endpoint             | Query params | Description                              |
 |--------|----------------------|--------------|------------------------------------------|
-| `GET`  | `/stats/cpu/`        | `?cache=true|false` | CPU usage percentage (0–100)    |
-| `GET`  | `/stats/memory/`     | `?cache=true|false` | Memory usage percentage (0–100) |
+| `GET`  | `/stats/cpu/`        | `?cache=true\|false` | CPU usage percentage (0–100)    |
+| `GET`  | `/stats/memory/`     | `?cache=true\|false` | Memory usage percentage (0–100) |
 
 ### Processes
 
