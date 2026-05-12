@@ -30,7 +30,7 @@ func Start(mux *http.ServeMux) {
 
 	logger.Get().Infof("Starting server on %s", srv.Addr)
 
-	if err := srv.ListenAndServe(); err != nil {
+	if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 		logger.Get().Fatalf("Error while starting server: %v", err)
 	}
 }
