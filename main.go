@@ -21,7 +21,9 @@ func main() {
 	tasks := scheduler.Start()
 	defer tasks.Stop()
 
-	security.Initialize()
+	if err := security.Initialize(); err != nil {
+		logger.Get().Fatalf("Security initialization failed: %v", err)
+	}
 
 	server.NewWithRoutes()
 	server.Start()
