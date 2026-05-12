@@ -8,6 +8,12 @@ import (
 	"github.com/jaroxcraft/vps-dash-server/logger"
 )
 
+const (
+	readTimeout  = 5 * time.Second
+	writeTimeout = 10 * time.Second
+	idleTimeout  = 120 * time.Second
+)
+
 func New() *http.ServeMux {
 	return http.NewServeMux()
 }
@@ -23,9 +29,9 @@ func Start(mux *http.ServeMux) {
 	srv := &http.Server{
 		Addr:         fmt.Sprintf(":%d", GetAPIPort()),
 		Handler:      mux,
-		ReadTimeout:  5 * time.Second,
-		WriteTimeout: 10 * time.Second,
-		IdleTimeout:  120 * time.Second,
+		ReadTimeout:  readTimeout,
+		WriteTimeout: writeTimeout,
+		IdleTimeout:  idleTimeout,
 	}
 
 	logger.Get().Infof("Starting server on %s", srv.Addr)
