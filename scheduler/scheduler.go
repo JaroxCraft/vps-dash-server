@@ -38,7 +38,7 @@ func Start() *tasks.Scheduler {
 		TaskFunc:   system.Cache,
 	})
 	if err != nil {
-		logger.Get().Fatalf("Error while Starting Snapshot Scheduler: %v", err)
+		logger.Get().Fatalf("Error while Starting Cache Scheduler: %v", err)
 	}
 
 	logger.Get().Infof("Cache-Scheduler started with id %s", colors.S(color.FgYellow, cacheTaskName))
