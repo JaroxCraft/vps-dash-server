@@ -5,7 +5,7 @@ go 1.25.0
 require (
 	github.com/fatih/color v1.19.0
 	github.com/joho/godotenv v1.5.1
-	github.com/madflojo/tasks v1.3.0
+	github.com/madflojo/tasks v1.3.1
 	github.com/shirou/gopsutil v3.21.11+incompatible
 	go.uber.org/zap v1.28.0
 )
